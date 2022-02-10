@@ -3,10 +3,10 @@ Blockchain analytics tool using Django
 ## blockChain
 This is a blockchain analytics tool where we display the data in 3 different charts. 
 ## Installation
-pip install django 
-pip install chartjs
-pip install django-bootstrap4
-pip install etherscan
+#1)pip install django 
+#2)pip install chartjs
+#3)pip install django-bootstrap4
+#4)pip install etherscan
 ## Usage 
 To run the server you need to type: python manage.py runserver
 then copy the address and add /index in the end.
