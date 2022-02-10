@@ -1,0 +1,28 @@
+{% extends 'partials/base.html' %}
+   {% block content %}
+       <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
+       <div class="row m-5">
+           <h1>Line Chart </h1>
+           <h3>Top 100 Accounts by ETH Balance </h3>
+       <div class="chart-container" style="position: relative; height:100vh; width:100vw">
+           <canvas id="myLine"></canvas>
+       </div>
+       <script>
+                const line = document.getElementById('myLine').getContext('2d');
+                const myLine = new Chart(line, {
+                    type: 'line',
+                    data: {
+                      labels: [{% for acc in accounts %} '{{ acc }}', {% endfor %}],
+                      datasets: [{
+                        data: [{% for val in balances %} {{ val }}, {% endfor %}],
+                        label: "ETH Balance",
+                        fill: false,
+                        borderColor: 'rgb(75, 192, 192)',
+                        tension: 0.1
+                      }],
+                    }
+                });
+
+                </script>
+       </div>
+   {% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'partials/base.html' %}
+   {% block content %}
+       <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
+       <div class="row m-5">
+           <h1>Pie Chart </h1>
+           <h3>Top 100 Accounts by ETH Balance </h3>
+       <div class="chart-container" style="position: relative; height:50vh; width:50vw">
+           <canvas id="myPie"></canvas>
+       </div>
+       <script>
+                Chart.overrides['doughnut'].plugins.legend.display = false
+                const pie = document.getElementById('myPie').getContext('2d');
+                const myPie = new Chart(pie, {
+                    type: 'doughnut',
+                    data: {
+                      labels: [{% for add in addresses %} '{{ add }}', {% endfor %}],
+                      datasets: [{
+                        data: [{% for val in balances %} {{ val }}, {% endfor %}],
+                        backgroundColor: [
+                          'rgb(255, 99, 132)',
+                          'rgb(54, 162, 235)',
+                          'rgb(255, 205, 86)',
+                          'rgb(113,234,215)',
+                            'rgb(152,180,137)',
+                        ],
+                        hoverOffset: 4
+                      }],
+                    },
+                options: {
+                    legend: {
+                        display: false
+                    },
+                    tooltips: {
+                        enabled: false
+                    }
+                }
+                });
+
+                </script>
+       </div>
+   {% endblock %}

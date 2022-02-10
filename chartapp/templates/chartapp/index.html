@@ -1,0 +1,46 @@
+{% extends 'partials/base.html' %}
+   {% block content %}
+       <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
+       <link rel="stylesheet" href="style.css">
+       <div class="row m-5">
+           <h1>Bar Chart </h1>
+           <h3>Top 100 Accounts by ETH Balance </h3>
+       <div class="container">
+           <canvas id="myChart"></canvas>
+           <table class="table" id="tableId">
+            </table>
+       </div>
+                <script>
+                const ctx = document.getElementById('myChart').getContext('2d');
+                const myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: [{% for add in addresses %} '{{ add }}', {% endfor %}],
+                        datasets: [{
+                            label: "ETH Balance",
+                            data: [{% for val in balances %} {{ val }}, {% endfor %}],
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)'
+                            ]
+                        }],
+
+                    },
+                    options: {
+                                scales: {
+                                    x: {
+                                        ticks: {
+                                            display: false //this will remove only the label
+                                        }
+                                    }
+                                }
+                            }
+                });
+
+                </script>
+
+       </div>
+
+   {% endblock %}
